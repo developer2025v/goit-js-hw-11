@@ -1,173 +1,124 @@
-/**
-  |============================
-  | include css partials with
-  | default @import url()
-  |============================
-*/
-/* Common styles */
-@import url('./reset.css');
-@import url('./base.css');
-
-
-
-
-ul {
-    margin: 0;
-    padding-left: 0;
-    list-style-type: none;
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #666;
+  --accent: #4e75ff;
+  --card: #f3f3f3;
+  --radius: 16px;
 }
 
-img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
+* {
+  box-sizing: border-box;
 }
 
-a {
-    cursor: pointer;
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+h1 {
+  font-size: 28px;
+  margin: 0 0 12px;
 }
 
 .form {
   display: flex;
-  flex-direction: row;
-  gap: 8px;
-  justify-content: center;
-  margin: 36px auto 32px;
+  gap: 12px;
+  margin: 12px 0 24px;
 }
-
-.form-input {
-  border-radius: 4px;
-  border: 1px solid #808080;
-  width: 272px;
-  height: 40px;
-  background-color: #fff;
-  font-family: var(--font-family);
-  font-weight: 400;
+.form input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid #ddd;
+  outline: none;
   font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
-  color: #808080;
 }
-
-.form-input:hover, .form-input:focus {
-  border: 1px solid #000;
-}
-
-.form-input:active {
-  border: 1px solid #4e75ff;
-}
-
-.btn {
-  border-radius: 8px;
+.form button {
+  padding: 12px 18px;
   border: none;
-  padding: 8px 16px;
-  width: 91px;
-  height: 40px;
-  background-color: #4e75ff;
-  font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 150%;
-  letter-spacing: 0.04em;
+  border-radius: var(--radius);
+  background: var(--accent);
   color: #fff;
+  font-weight: 600;
+  cursor: pointer;
 }
-
-.btn:hover, .btn:focus {
-  background-color: #6c8cff;
+.form button:hover {
+  opacity: 0.9;
 }
 
 .gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  justify-content: center;
-  width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.gallery-item {
-  flex-basis: calc((100% - 54px) / 3);
-  border: 1px solid #808080;
-  margin: 0;
+  list-style: none;
   padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
 }
-
-.gallery-link {
-  display: block; 
+.gallery-item {
+  background: var(--card);
+  border-radius: var(--radius);
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
-
+.gallery-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
 .gallery-image {
-  width: 100%; 
-  height: 100%; 
+  width: 100%;
+  height: 200px;
   object-fit: cover;
+  display: block;
 }
-
-.gallery-box {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-
-.gallery-box-text {
-  font-family: var(--font-family);
-  font-weight: 600;
+.gallery-info {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 10px 12px;
+  gap: 8px;
   font-size: 12px;
-  line-height: 1.33;
-  letter-spacing: 0.04em;
-  color: #2e2f42;
+  color: var(--muted);
+}
+.gallery-info b {
+  display: block;
+  font-size: 13px;
+  color: var(--text);
 }
 
-.gallery-box-span {
-  display: flex;
+.loader-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(1px);
+  display: none;
+  align-items: center;
   justify-content: center;
-  font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 2.0;
-  letter-spacing: 0.04em;
-  color: #2e2f42;
+  z-index: 999;
+}
+.loader-backdrop.is-visible {
+  display: flex;
 }
 
 .loader {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
+  border: 4px solid #ddd;
+  border-top-color: var(--accent);
   border-radius: 50%;
-  position: relative;
-  animation: rotate 1s linear infinite;
-  margin-left: auto;
-  margin-right: auto;
+  animation: spin 1s linear infinite;
 }
-.loader::before , .loader::after {
-  content: "";
-  box-sizing: border-box;
-  position: absolute;
-  inset: 0px;
-  border-radius: 50%;
-  border: 5px solid #FFF;
-  animation: prixClipFix 2s linear infinite ;
-}
-.loader::after{
-  border-color: #FF3D00;
-  animation: prixClipFix 2s linear infinite , rotate 0.5s linear infinite reverse;
-  inset: 6px;
-}
-
-@keyframes rotate {
-  0%   {transform: rotate(0deg)}
-  100%   {transform: rotate(360deg)}
-}
-
-@keyframes prixClipFix {
-    0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
-    25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
-    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
-    75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
-    100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
-}
-
-.is-hidden {
-  display: none;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

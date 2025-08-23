@@ -4,7 +4,7 @@ export default defineConfig({
   base: "/goit-js-hw-11/",
   root: "src",
   build: {
-    outDir: "../docs",
+    outDir: "dist",
     emptyOutDir: true,
     sourcemap: true,
   },
